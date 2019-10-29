@@ -2,8 +2,26 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Context, Contract } from 'fabric-contract-api';
+// import { Context, Contract } from 'fabric-contract-api';
 import { Car } from './car';
+
+export class Contract {
+}
+
+interface Iterator {
+    next: () => Promise<{ value: { value: Buffer, key: string }, done: boolean }>;
+    close: () => Promise<void>;
+}
+
+interface Stub {
+    putState: (name: string, data: Buffer) => Promise<void>;
+    getState: (name: string) => Promise<Buffer>;
+    getStateByRange: (v1: string, v2: string) => Promise<Iterator>;
+}
+
+export interface Context {
+    stub: Stub
+}
 
 export class FabCar extends Contract {
 
