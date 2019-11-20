@@ -5,21 +5,26 @@
 // import { Context, Contract } from 'fabric-contract-api';
 import { Car } from './car';
 
+declare type Buffer = any;
+declare let Buffer: Buffer;
+
+declare let console: any;
+
 export class Contract {
 }
 
-interface Iterator {
+type Iterator = {
     next: () => Promise<{ value: { value: Buffer, key: string }, done: boolean }>;
     close: () => Promise<void>;
 }
 
-interface Stub {
+type Stub = {
     putState: (name: string, data: Buffer) => Promise<void>;
     getState: (name: string) => Promise<Buffer>;
     getStateByRange: (v1: string, v2: string) => Promise<Iterator>;
 }
 
-export interface Context {
+export type Context = {
     stub: Stub
 }
 
